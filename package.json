@@ -11,9 +11,12 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^2.7.0",
     "@stripe/stripe-js": "^3.3.0",
+    "lucide-react": "^0.368.0",
     "next": "14.1.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "stripe": "^15.1.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
