@@ -31,8 +31,7 @@ const CheckoutForm = () => {
             setMessage(error.message)
         } else if(paymentIntent.status === 'succeeded') {
             setMessage('Payment successful 🎉, Redirectiong to completion page')
-            const res = await stripe.retrieveOrder(paymentIntent?.client_secret || '')
-            console.log(res)
+            // now we can store this in our db (since it is one time payment we can simply store the userid and payment intent id in our db)
             router.push('/completion')
         } else {
             setMessage('Payment failed')

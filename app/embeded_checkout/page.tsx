@@ -14,9 +14,9 @@ const EmbededCheckout = () => {
                     <h1 className="text-center text-lg">Your total amount it $5</h1>
                     <button
                         className="bg-blue-500 text-white p-2 rounded-md mt-2 hover:bg-opacity-90 m-2"
-                        onClick={() => setShowCheckout(true)}
+                        onClick={() => setShowCheckout(!showCheckout)}
                     >
-                        Checkout
+                        {showCheckout ? 'Pay later' : 'Pay now'}
                     </button>
                 </div>
 
