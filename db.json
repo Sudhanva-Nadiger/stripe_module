@@ -1,0 +1,16 @@
+{
+  "subscriptionDetails": [
+    {
+      "id": "1",
+      "userId": "1"
+    },
+    {
+      "id": "a5c12552-8083-4242-b634-70d574aa73ba",
+      "userId": "a5c12552-8083-4242-b634-70d574aa73ba",
+      "stripeSubscriptionId": "sub_1P4z0CSIwUkr9so0Zv7MnnSo",
+      "stripeCustomerId": "cus_PuoduQ8zbSCybH",
+      "stripePriceId": "price_1P4ks9SIwUkr9so0qocrZpOt",
+      "stripeCurrentPeriodEnd": "2025-04-13T05:19:48.000Z"
+    }
+  ]
+}
