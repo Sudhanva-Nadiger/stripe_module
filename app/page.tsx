@@ -11,6 +11,7 @@ export default function Home() {
   const [clientSecret, setClientSecret] = useState();
   const [loading, setLoading] = useState(false);
 
+  // this amount will be calculated dynamically based on the user's cart
   const amount = 5;
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export default function Home() {
   if(loading) return <div>Loading...</div>
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center">
+    <div className="w-full min-h-screen flex flex-col">
       <h1>Welcome to payment your total amount is ${amount}</h1>
       <Elements stripe={stripePromise} options={{ clientSecret }}>
         <CheckoutForm />

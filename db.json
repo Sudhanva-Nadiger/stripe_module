@@ -11,6 +11,14 @@
       "stripeCustomerId": "cus_PuoduQ8zbSCybH",
       "stripePriceId": "price_1P4ks9SIwUkr9so0qocrZpOt",
       "stripeCurrentPeriodEnd": "2025-04-13T05:19:48.000Z"
+    },
+    {
+      "id": "cffebabb-eaec-4910-8d15-8c36bcd230f0",
+      "userId": "cffebabb-eaec-4910-8d15-8c36bcd230f0",
+      "stripeSubscriptionId": "sub_1P4zuhSIwUkr9so0fHpOPOJM",
+      "stripeCustomerId": "cus_PupZSlB4NjSF4F",
+      "stripePriceId": "price_1P4ks9SIwUkr9so0qocrZpOt",
+      "stripeCurrentPeriodEnd": "2025-04-13T06:18:11.000Z"
     }
   ]
 }
