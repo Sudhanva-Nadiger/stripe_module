@@ -1,4 +1,5 @@
 import { stripe } from "@/app/lib/stripe";
+import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -23,10 +24,13 @@ export async function POST(req: Request) {
             },
             name: 'John Doe',
         },
-
+        metadata: {
+            userId: randomUUID()
+        }
     })
 
-return NextResponse.json({
-    ClientSecret: paymentIntent.client_secret
-})
+
+    return NextResponse.json({
+        ClientSecret: paymentIntent.client_secret
+    })
 }

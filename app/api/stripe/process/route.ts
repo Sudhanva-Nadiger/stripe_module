@@ -1,8 +1,8 @@
-import { subscriptionDetails } from "@/app/lib/db"
 import { stripe } from "@/app/lib/stripe"
 import { stripeProcessPaymentValidator } from "@/app/lib/util"
 import { NextResponse } from "next/server"
-
+import { DB_URL } from "@/app/lib/constants"
+ 
 export async function POST(request: Request) {
     const body = await request.json()
 
@@ -13,22 +13,62 @@ export async function POST(request: Request) {
 
     if(session.status === 'complete') {
         // dbcall to save this detail
-        const index = subscriptionDetails.findIndex(sub => sub.userId === session.metadata?.userId)
-        if(index !== -1) {
-            subscriptionDetails[index].stripePriceId = subscription.items.data[0].id
-            subscriptionDetails[index].stripeCurrentPeriodEnd = new Date(subscription.current_period_end * 1000)
+        const userId = session.metadata?.userId
+        if(!userId) {
+            return NextResponse.json({}, {status: 200})
+        }
+
+        console.log("somethin happeening");
+        
+
+        const response = await fetch(`${DB_URL}/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        let dbSubscriptionDetail = null
+
+        if(response.status === 200) {
+            dbSubscriptionDetail = await response.json()
+        }
+
+        console.log("somethin happend");
+        
+
+        if(!dbSubscriptionDetail) {
+            await fetch(DB_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: userId,
+                    userId: userId,
+                    stripeSubscriptionId: subscription.id,
+                    stripeCustomerId: session.customer as string,
+                    stripePriceId: subscription.items.data[0].price.id,
+                    stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000)
+                })
+            })
         } else {
-            subscriptionDetails.push({
-                userId: session.metadata?.userId as string,
-                stripeSubscriptionId: subscription.id,
-                stripeCustomerId: subscription.customer as string,
-                stripePriceId: subscription.items.data[0].id,
-                stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000)
+            await fetch(`${DB_URL}/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: userId,
+                    userId: userId,
+                    stripeSubscriptionId: subscription.id,
+                    stripeCustomerId: session.customer as string,
+                    stripePriceId: subscription.items.data[0].price.id,
+                    stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000)
+                })
             })
         }
     }
-
-    console.log(subscriptionDetails);
     
 
     return NextResponse.json({

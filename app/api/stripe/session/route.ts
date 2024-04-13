@@ -1,5 +1,6 @@
 import { stripe } from "@/app/lib/stripe";
 import { sessionInputValidator } from "@/app/lib/util";
+import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
             mode: 'subscription',
             return_url: `${request.headers.get('origin')}/embeded_checkout/return?session_id={CHECKOUT_SESSION_ID}`,
             metadata:{
-                userId: 'Sudhanva_Nadiger'
+                userId: randomUUID()
             }
         })
 

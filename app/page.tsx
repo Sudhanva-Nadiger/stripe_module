@@ -11,13 +11,15 @@ export default function Home() {
   const [clientSecret, setClientSecret] = useState();
   const [loading, setLoading] = useState(false);
 
+  const amount = 5;
+
   useEffect(() => {
     setLoading(true);
     (async function () {
       const response = await fetch(absoluteUrl('/api/stripe'), {
         method: 'POST',
         body: JSON.stringify({
-          amount: 5,
+          amount: amount,
           currency: 'usd',
           payment_method_types: ['card']
         })
@@ -37,7 +39,7 @@ export default function Home() {
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center">
-      <h1>Welcome to payment</h1>
+      <h1>Welcome to payment your total amount is ${amount}</h1>
       <Elements stripe={stripePromise} options={{ clientSecret }}>
         <CheckoutForm />
       </Elements>
